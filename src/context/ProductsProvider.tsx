@@ -23,15 +23,15 @@ export const ProductsProvider = ({ children }: ChildrenType) => {
 
 	useEffect(() => {
 		const fetchProducts = async (): Promise<ProductType[]> => {
-			const data = await fetch('./../../data/products.json')
+			const data: UseProductsContextType = await fetch('./../../data/products.json')
 				.then((res) => res.json())
 				.catch((error) => {
 					if (error instanceof Error) console.log(error.message)
 				})
-			return data
+			return data.products
 		}
 
-		fetchProducts().then((products) => setProducts(products))
+		fetchProducts().then((products: ProductType[]) => setProducts(products))
 	}, [])
 
 	return <ProductsContext.Provider value={{ products }}>{children}</ProductsContext.Provider>
